@@ -350,7 +350,7 @@ def register_device(device, loop: AbstractEventLoop):
         if k in ["vendor_id", "product_id", "version", "bustype"]:
             extra_options[k] = v
 
-    output = UInput(caps, extra_options)
+    output = UInput(caps, **extra_options)
 
     print("Registered: %s, %s, %s" % (input.name, input.path, input.phys), flush=True)
     task = loop.create_task(
