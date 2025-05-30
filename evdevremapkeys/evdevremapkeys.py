@@ -323,7 +323,7 @@ def register_device(device, loop: AbstractEventLoop):
     del caps[ecodes.EV_SYN]
 
     remappings = device["remappings"]
-    if not ecodes.EV_KEY in caps:
+    if ecodes.EV_KEY not in caps:
         extended = set()
     else:
         extended = set(caps[ecodes.EV_KEY])
