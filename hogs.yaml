@@ -1,10 +1,14 @@
 devices:
   - input_name: "Thustmaster Joystick - HOTAS Warthog"
     output_name: "Joystick - HOTAS Warthog"
+    product: 0x0402
+    vendor: 0x44f
     version: 42
     remappings: {}
   - input_name: "Thrustmaster Throttle - HOTAS Warthog"
     output_name: "Throttle - HOTAS Warthog"
+    product: 0x0404
+    vendor: 0x44f
     version: 42
     remappings: {}
   - input_name: "Thrustmaster T-Rudder"

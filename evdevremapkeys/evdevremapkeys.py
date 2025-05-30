@@ -351,6 +351,7 @@ def register_device(device, loop: AbstractEventLoop):
 
     extra_options = {"name": device["output_name"]}
 
+
     for k, v in device.items():
         if k in ["vendor", "product", "version", "bustype"]:
             extra_options[k] = v
