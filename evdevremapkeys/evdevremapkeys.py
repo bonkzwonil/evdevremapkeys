@@ -292,7 +292,7 @@ def find_input(device):
             continue
         if (
             input.path in registered_devices
-            and registered_devices[input.path]["input"] != None
+            and registered_devices[input.path]["input"] is not None
         ):
             continue
         return input
@@ -355,7 +355,8 @@ def register_device(device, loop: AbstractEventLoop):
         if k in ["vendor", "product", "version", "bustype"]:
             extra_options[k] = v
 
-    output = UInput(caps, **extra_options)
+    if not existing_output:
+        output = UInput(caps, **extra_options)
 
     print("Registered: %s, %s, %s" % (input.name, input.path, input.phys), flush=True)
     task = loop.create_task(
