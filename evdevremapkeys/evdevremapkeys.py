@@ -73,7 +73,9 @@ async def handle_events(
     finally:
         registered_devices[input.path]["input"] = None
         registered_devices[input.path]["task"] = None
-        print(f"Device disconnected: {input.name} ({input.path}) {input.phys}", flush=True)
+        print(
+            f"Device disconnected: {input.name} ({input.path}) {input.phys}", flush=True
+        )
         input.close()
 
 
@@ -280,22 +282,25 @@ def find_input(device):
 
     devices = [InputDevice(fn) for fn in evdev.list_devices()]
     for input in devices:
-        #print(registered_devices)
-        #print(input.path)
+        # print(registered_devices)
+        # print(input.path)
         if name is not None and input.name != name:
             continue
         if phys is not None and input.phys != phys:
             continue
         if fn is not None and input.path != fn:
             continue
-        if input.path in registered_devices and registered_devices[input.path]["input"] != None:
+        if (
+            input.path in registered_devices
+            and registered_devices[input.path]["input"] != None
+        ):
             continue
         return input
     return None
 
 
 def register_device(device, loop: AbstractEventLoop):
-    #print("reg dev", flush=True)
+    # print("reg dev", flush=True)
     for value in registered_devices.values():
         if device == value["device"] and value["task"]:
             return value["task"]
@@ -304,13 +309,13 @@ def register_device(device, loop: AbstractEventLoop):
     if input is None:
         return None
 
-    #reuse output
+    # reuse output
     existing_output = None
     for val in registered_devices.values():
         if val["device"] == device:
             existing_output = val["output"]
             break
-        
+
     input.grab()
 
     caps = input.capabilities()
@@ -360,7 +365,7 @@ def register_device(device, loop: AbstractEventLoop):
         "task": task,
         "device": device,
         "input": input,
-        "output": output
+        "output": output,
     }
     return task
 
